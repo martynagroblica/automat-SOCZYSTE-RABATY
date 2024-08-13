@@ -141,20 +141,22 @@ ims = ims[ims['APD_Czy_istnieje_na_rynku']==1]
 #ims
 
 wynik_df = pd.merge(powiazanie, ims, left_on='KLIENT', right_on='Klient', how='left')
-wynik_df
+#wynik_df
 
 # Wybór potrzebnych kolumn: 'APD_kod_SAP_apteki' i 'max_percent'
 wynik_df = wynik_df[['KLIENT','APD_kod_SAP_apteki', 'max_percent']]
-wynik_df
+#wynik_df
 
-print(wynik_df)
+#print(wynik_df)
 
-wynik_df['KLIENT'].nunique() #ZGADZA SIĘ :)
+#wynik_df['KLIENT'].nunique() #ZGADZA SIĘ :)
 wynik_df = wynik_df[['APD_kod_SAP_apteki','max_percent']]
 wynik_df = wynik_df.rename(columns={'APD_kod_SAP_apteki': 'Kod klienta'})
-wynik_df
+#wynik_df
 
 #POŁĄCZYĆ wynik_df z standard_ost
 ostatecznie = pd.concat([standard_ost, wynik_df], axis = 0)
 ostatecznie
+
+st.download_button('Pobierz wynik', ostatecznie)
 
