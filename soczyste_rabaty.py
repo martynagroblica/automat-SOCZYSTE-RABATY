@@ -43,14 +43,14 @@ df = st.file_uploader(
     label = "Wrzuć plik Cykl - soczyste rabaty"
 )
 
-    
-im = pd.read_excel(io='imiona2022_prop.xlsx',engine='openpyxl',dtype={'Rok':str})
+if df:
+    df = pd.read_excel(df, sheet_name = 'Promocje na utrzymanie i FUS', skiprows = 15, usecols = [1,2,9,10])
+
 
 #wczytanie pliku z komputera
-sheet_name = 'Promocje na utrzymanie i FUS'
-file_path = r'C:\Users\mgroblica\Neuca S.A\Obszar Doskonalenia Procesow - Dokumenty\MONITORINGI AUTOMATY\Cykle - pliki źródłowe\Cykl soczyste rabaty.xlsx'
 
-df = pd.read_excel(file_path, sheet_name = sheet_name, skiprows=15, usecols = [1,2,9,10])
+
+#df = pd.read_excel(file_path, sheet_name = sheet_name, skiprows=15, usecols = [1,2,9,10])
 
 df
 
