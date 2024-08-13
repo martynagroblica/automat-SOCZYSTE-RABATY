@@ -73,7 +73,7 @@ df['SIECIOWY'] = df.apply(lambda row: 'SIECIOWY' if 'powiązanie' in str(row['12
 #df
 
 #SPRAWDZENIE CZY DZIAŁA
-df[df['SIECIOWY'] == 'SIECIOWY']
+#df[df['SIECIOWY'] == 'SIECIOWY']
 #DZIAŁA :)
 
 # Funkcja do wyodrębnienia wartości procentowej
