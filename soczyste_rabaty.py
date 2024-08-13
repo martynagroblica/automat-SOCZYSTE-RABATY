@@ -130,7 +130,7 @@ ims = st.file_uploader(
 
 if ims:
     ims = pd.read_excel(ims, usecols=[0,2,21])
-    st.write(df.head())
+    st.write(ims.head())
 
 ims = ims[ims['APD_Czy_istnieje_na_rynku']==1]
 
