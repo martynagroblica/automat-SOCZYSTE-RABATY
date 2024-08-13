@@ -160,3 +160,16 @@ ostatecznie
 
 st.download_button('Pobierz wynik', ostatecznie)
 
+excel_file = io.BytesIO()
+with pd.ExcelWriter(excel_file, engine='xlsxwriter') as writer:
+    ostatecznie.to_excel(writer, index=False, sheet_name='Sheet1')
+excel_file.seek(0)  # Resetowanie wskaźnika do początku pliku
+
+# Umożliwienie pobrania pliku Excel
+st.download_button(
+    label='Pobierz wynik Excel',
+    data=excel_file,
+    file_name='wynik.xlsx',
+    mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+)
+
