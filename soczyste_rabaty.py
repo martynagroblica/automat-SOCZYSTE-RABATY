@@ -8,6 +8,7 @@ Original file is located at
 """
 
 #importowanie potrzebnych bibliotek
+import streamlit as st
 import pandas as pd
 
 #wczytanie pliku z komputera
