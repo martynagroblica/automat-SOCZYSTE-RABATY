@@ -156,9 +156,9 @@ wynik_df = wynik_df.rename(columns={'APD_kod_SAP_apteki': 'Kod klienta'})
 
 #POŁĄCZYĆ wynik_df z standard_ost
 ostatecznie = pd.concat([standard_ost, wynik_df], axis = 0)
-ostatecznie = pd.DataFrame(ostatecznie)
 
-st.download_button('Pobierz wynik', ostatecznie)
+
+#st.download_button('Pobierz wynik', ostatecznie)
 
 excel_file = io.BytesIO()
 with pd.ExcelWriter(excel_file, engine='xlsxwriter') as writer:
