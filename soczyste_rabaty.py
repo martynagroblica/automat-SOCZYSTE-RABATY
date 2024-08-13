@@ -128,9 +128,10 @@ ims = st.file_uploader(
 )
 
 if ims:
-    ims = pd.read_excel(ims, usecols=[0,2,21]
-    ims = ims[ims['APD_Czy_istnieje_na_rynku']==1]
+    ims = pd.read_excel(ims, usecols=[0,2,21])
     st.write(df.head())
+
+ims = ims[ims['APD_Czy_istnieje_na_rynku']==1]
 
 #ims_path = r'C:\Users\mgroblica\Neuca S.A\Obszar Doskonalenia Procesow - Dokumenty\MONITORINGI AUTOMATY\Cykle - pliki źródłowe\ims_nhd.xlsx'
 
