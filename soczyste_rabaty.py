@@ -8,8 +8,43 @@ Original file is located at
 """
 
 #importowanie potrzebnych bibliotek
+import os
+import openpyxl
 import streamlit as st
 import pandas as pd
+import numpy as np
+import altair as alt
+import plotly.express as px
+import plotly.graph_objects as go
+from urllib.request import urlopen
+import json
+
+
+
+st.set_page_config(page_title='Automat - soczyste rabaty', layout='wide')
+
+
+tabs_font_css = """
+<style>
+div[class*="stTextInput"] label {
+  font-size: 26px;
+  color: black;
+}
+div[class*="stSelectbox"] label {
+  font-size: 26px;
+  color: black;
+}
+</style>
+"""
+
+st.write(tabs_font_css, unsafe_allow_html=True)
+
+df = st.file_uploader(
+    label = "Wrzuć plik Cykl - soczyste rabaty"
+)
+
+    
+im = pd.read_excel(io='imiona2022_prop.xlsx',engine='openpyxl',dtype={'Rok':str})
 
 #wczytanie pliku z komputera
 sheet_name = 'Promocje na utrzymanie i FUS'
