@@ -45,6 +45,7 @@ df = st.file_uploader(
 
 if df:
     df = pd.read_excel(df, sheet_name = 'Promocje na utrzymanie i FUS', skiprows = 15, usecols = [1,2,9,10])
+    st.write(df.head())
 
 
 #wczytanie pliku z komputera
@@ -52,7 +53,7 @@ if df:
 
 #df = pd.read_excel(file_path, sheet_name = sheet_name, skiprows=15, usecols = [1,2,9,10])
 
-df
+#df
 
 #usuń braki danych z Kod klienta
 df = df.dropna(subset=['Kod klienta'])
@@ -64,12 +65,12 @@ df['Kod klienta'] = df['Kod klienta'].astype(int)
 # Zmiana nazw kolumn
 df = df.rename(columns={'0.12.1': '12', '0.14.1': '14'})
 
-df
+#df
 
 # Dodaj kolumnę 'SIECIOWY', która będzie zawierać 'SIECIOWY' jeśli w kolumnach '12' lub '14' jest słowo 'powiązanie'
 df['SIECIOWY'] = df.apply(lambda row: 'SIECIOWY' if 'powiązanie' in str(row['12']).lower() or 'powiązanie' in str(row['14']).lower() else '', axis=1)
 
-df
+#df
 
 #SPRAWDZENIE CZY DZIAŁA
 df[df['SIECIOWY'] == 'SIECIOWY']
@@ -85,7 +86,7 @@ def extract_percentage(text):
 df['12_percent'] = df['12'].apply(extract_percentage)
 df['14_percent'] = df['14'].apply(extract_percentage)
 
-df
+#df
 
 # Funkcja do konwersji wartości procentowej na float
 def percentage_to_float(percentage_str):
@@ -101,7 +102,7 @@ df['14_percent'] = df['14_percent'].apply(percentage_to_float)
 # Dodaj nową kolumnę 'max_percent' z maksymalnymi wartościami z kolumn '12_percent' i '14_percent'
 df['max_percent'] = df[['12_percent', '14_percent']].max(axis=1)
 
-df
+#df
 
 # Wybierz wiersze, gdzie 'max_percent' nie jest równa 0
 filtered_df = df[df['max_percent'] != 0]
@@ -109,22 +110,34 @@ filtered_df = df[df['max_percent'] != 0]
 standard = filtered_df[filtered_df['SIECIOWY'] != 'SIECIOWY']
 powiazanie = filtered_df[filtered_df['SIECIOWY'] == 'SIECIOWY']
 
-len(standard), len(powiazanie), len(filtered_df)
+#len(standard), len(powiazanie), len(filtered_df)
 
 standard_ost = standard[['Kod klienta', 'max_percent']]
-standard_ost
+#standard_ost
 
 powiazanie = powiazanie[['KLIENT','Kod klienta','max_percent']]
-powiazanie
+#powiazanie
 
 
 
-ims_path = r'C:\Users\mgroblica\Neuca S.A\Obszar Doskonalenia Procesow - Dokumenty\MONITORINGI AUTOMATY\Cykle - pliki źródłowe\ims_nhd.xlsx'
 
-ims = pd.read_excel(ims_path, usecols=[0,2,21])
-ims = ims[ims['APD_Czy_istnieje_na_rynku']==1]
+#TERAZ IMS
 
-ims
+ims = st.file_uploader(
+    label = "Wrzuć plik ims_nhd"
+)
+
+if ims:
+    ims = pd.read_excel(ims, usecols=[0,2,21]
+    ims = ims[ims['APD_Czy_istnieje_na_rynku']==1]
+    st.write(df.head())
+
+#ims_path = r'C:\Users\mgroblica\Neuca S.A\Obszar Doskonalenia Procesow - Dokumenty\MONITORINGI AUTOMATY\Cykle - pliki źródłowe\ims_nhd.xlsx'
+
+#ims = pd.read_excel(ims_path, usecols=[0,2,21])
+
+
+#ims
 
 wynik_df = pd.merge(powiazanie, ims, left_on='KLIENT', right_on='Klient', how='left')
 wynik_df
