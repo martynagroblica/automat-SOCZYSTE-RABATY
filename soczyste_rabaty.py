@@ -150,13 +150,27 @@ wynik_df
 
 #print(wynik_df)
 
-#wynik_df['KLIENT'].nunique() #ZGADZA SIĘ :)
-wynik_df = wynik_df[['APD_kod_SAP_apteki','max_percent']]
-wynik_df = wynik_df.rename(columns={'APD_kod_SAP_apteki': 'Kod klienta'})
-#wynik_df
+#to są kody SAP
+wynik_df1 = wynik_df.rename(columns={'APD_kod_SAP_apteki': 'Kod klienta'})
+wynik_df1 = wynik_df1[['Kod klienta','max_percent']]
+#wynik_df1
+
+#to są kody powiazan
+wynik_df2 = wynik_df.rename(columns={'KLIENT': 'Kod klienta'})
+wynik_df2 = wynik_df2[['Kod klienta','max_percent']]
+#wynik_df2
 
 #POŁĄCZYĆ wynik_df z standard_ost
-ostatecznie = pd.concat([standard_ost, wynik_df], axis = 0)
+polaczone = pd.concat([standard_ost, wynik_df1, wynik_df2], axis = 0)
+#polaczone
+
+posortowane = polaczone.sort_values(by='max_percent', ascending=False)
+#posortowane
+
+bez_duplikatow = posortowane.drop_duplicates(subset='Kod klienta')
+#bez_duplikatow
+
+ostatecznie = bez_duplikatow
 
 
 #st.download_button('Pobierz wynik', ostatecznie)
