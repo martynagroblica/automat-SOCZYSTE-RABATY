@@ -167,10 +167,9 @@ polaczone = pd.concat([standard_ost, wynik_df1, wynik_df2], axis = 0)
 posortowane = polaczone.sort_values(by='max_percent', ascending=False)
 #posortowane
 
-bez_duplikatow = posortowane.drop_duplicates(subset='Kod klienta')
-#bez_duplikatow
+ostatecznie = posortowane.drop_duplicates(subset='Kod klienta')
+#ostatecznie
 
-ostatecznie = bez_duplikatow
 
 
 #st.download_button('Pobierz wynik', ostatecznie)
