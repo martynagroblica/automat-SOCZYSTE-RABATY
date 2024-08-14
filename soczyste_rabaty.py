@@ -153,7 +153,7 @@ wynik_df = wynik_df[['KLIENT','APD_kod_SAP_apteki', 'max_percent']]
 #wynik_df['KLIENT'].nunique() #ZGADZA SIĘ :)
 wynik_df = wynik_df[['APD_kod_SAP_apteki','max_percent']]
 wynik_df = wynik_df.rename(columns={'APD_kod_SAP_apteki': 'Kod klienta'})
-#wynik_df
+wynik_df
 
 #POŁĄCZYĆ wynik_df z standard_ost
 ostatecznie = pd.concat([standard_ost, wynik_df], axis = 0)
